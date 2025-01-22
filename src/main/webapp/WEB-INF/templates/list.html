@@ -10,32 +10,31 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" th:href="@{/}">Coupang</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" th:href="@{/}">주의 말씀은 내 발에 등이요 내 길에 빛이니이다 (시 119:195)</a>
     </div>
 </nav>
 <div class="container-fluid mt-5">
-    <h2>상품 목록</h2>
+    <h2>QT Notes</h2>
     <div class="d-flex justify-content-end mb-3">
-        <button class="btn btn-success" onclick="location.href='./add'">상품 생성하기</button>
+        <button class="btn btn-success" onclick="location.href='./add'">묵상 작성하기</button>
     </div>
-    <table class="table table-bordered">
-        <thead class="thead-light">
-        <tr>
-            <th>사진</th>
-            <th>상품명</th>
-            <th>가격</th>
-            <th>재고 수량</th>
-            <th>생성 일자</th>
-            <th>수정 일자</th>
-            <th>Action</th>
-        </tr>
-        </thead>
+        <table class="table table-bordered">
+            <!--        없애도 될듯 -->
+            <!--        <thead class="thead-light">-->
+            <!--        <tr>-->
+            <!--            <th>사진</th>-->
+            <!--            <th>상품명</th>-->
+            <!--            <th>가격</th>-->
+            <!--            <th>재고 수량</th>-->
+            <!--            <th>생성 일자</th>-->
+            <!--            <th>수정 일자</th>-->
+            <!--            <th>Action</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
         <tbody>
 
         <tr th:each="product, iterStat : ${products.productList}">
+            <!-- 생성 일자(수정 일자), 말씀 구절, 말씀 요약으로 수정-->
             <td>
                 <a th:href="@{'/products/' + ${product.id}}">
                     <img th:src="@{'/image/' + ${product.image}}" style="width: 200px; height: 200px;">
@@ -46,6 +45,7 @@
             <td th:text="${product.stock}">stock</td>
             <td th:text="${product.createdAt}">createdAt</td>
             <td th:text="${product.updatedAt}">updatedAt</td>
+<!-- 삭제, 수정, 상세 보기를 아이콘 버튼으로 나타냄 -->
             <td>
                 <button class="btn btn-danger" th:onclick="confirmDelete([[${product.id}]])">삭제하기</button>
                 <button class="btn btn-warning" th:onclick="location.href='./edit/' + [[${product.id}]]">수정하기</button>
