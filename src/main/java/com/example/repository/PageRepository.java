@@ -16,6 +16,10 @@ public class PageRepository {
         return sqlSession.selectList("Page.findAll");
     }
 
+    public List<Page> search(String keyword) {
+        return sqlSession.selectList("Page.search", keyword);
+    }
+
     public void add(Page page) {
         sqlSession.insert("Page.add", page);
     }

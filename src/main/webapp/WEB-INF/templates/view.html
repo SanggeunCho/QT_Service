@@ -120,16 +120,22 @@
             <p class="contemplation">묵상 및 적용: <span th:text="${page.contemplation}">contemplation</span></p>
             <p class="pray">기도제목: <span th:text="${page.pray}">pray</span></p>
             <div class="image">
-                <img th:src="${page.image != null ? '/image/' + page.image : '/image/default.jpg'}"
-                     class="img-fluid"
-                     style="max-width: 100%; height: auto;">
+                <img th:src="@{'/image/' + ${page.image}}" style="width: 200px; height: 200px;">
             </div>
             <div class="button-container">
-                <button class="delete_btn">삭제</button>
-                <button class="edit_btn">수정</button>
+                <button class="delete_btn" th:onclick="confirmDelete([[${page.id}]])">삭제</button>
+                <button class="edit_btn" th:onclick="location.href='./edit/' + [[${page.id}]]">수정</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function confirmDelete(id){
+        if(confirm('정말 삭제하시겠습니까?')){
+            location.href = './delete/' + id;
+        }
+    }
+</script>
 </body>
 </html>

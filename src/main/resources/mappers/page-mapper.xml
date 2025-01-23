@@ -4,6 +4,11 @@
     <select id="findAll" resultType="page">
         select * from page order by createdAt desc
     </select>
+    <select id="search" resultType="page">
+        SELECT * FROM page
+        WHERE word LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY createdAt DESC
+    </select>
     <select id="add">
         insert into page (word, celebration, summation, contemplation, pray, image)
         values

@@ -114,6 +114,9 @@
         .info_btn:hover {
             background-color: #FFB300;
         }
+        .search-bar {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -122,6 +125,13 @@
     <h1><a th:href="@{/}" style="text-decoration: none; color: inherit;">Quiet Time with Jesus</a></h1>
 </div>
 <h2>My Notes</h2>
+<div class="search-bar">
+    <form action="/pages/list" method="get">
+        <input type="text" name="search" placeholder="검색어 입력"
+               th:value="${search}" style="padding: 8px; width: 200px; border: 1px solid #ddd; border-radius: 4px;" />
+        <button type="submit" class="btn">검색</button>
+    </form>
+</div>
 <div class="list">
     <button class="add btn" onclick="location.href='./add'">묵상 작성하기</button>
 </div>
@@ -142,23 +152,16 @@
             <button class="info_btn" th:onclick="location.href='./' + [[${page.id}]]">자세히</button>
         </td>
     </tr>
+    <tr th:if="${pages.size() == 0}">
+        <td colspan="4" style="text-align: center;">검색 결과가 없습니다.</td>
+    </tr>
     </tbody>
 </table>
-
-<div class="pagination">
-    <button th:if="${currentPage > 0}"
-            th:onclick="location.href='/pages/list?page=' + (${currentPage} - 1)">이전</button>
-
-    <span>Page <span th:text="${currentPage + 1}"></span> / <span th:text="${totalPages}"></span></span>
-
-    <button th:if="${currentPage + 1 < totalPages}"
-            th:onclick="location.href='/pages/list?page=' + (${currentPage} + 1)">다음</button>
-</div>
 
 <script>
     function confirmDelete(id){
         if(confirm('정말 삭제하시겠습니까?')){
-            location.href = './delete' + id;
+            location.href = './delete/' + id;
         }
     }
 </script>

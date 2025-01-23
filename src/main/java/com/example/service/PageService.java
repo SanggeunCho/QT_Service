@@ -22,6 +22,10 @@ public class PageService {
         return pageRepository.findAll();
     }
 
+    public List<Page> searchPages(String keyword) {
+        return pageRepository.search(keyword);
+    }
+
     public void addPage(AddPageForm form, MultipartFile image, HttpServletRequest request) {
         pageRepository.add(Page.builder()
                 .word(form.getWord())

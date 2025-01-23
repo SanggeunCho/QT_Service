@@ -21,8 +21,12 @@ public class PageController {
     private final PageService pageService;
 
     @GetMapping(value = "/pages/list")
-    public String list(Model model) {
-        model.addAttribute("pages", PageListDto.from(pageService.getPages()));
+    public String list(@RequestParam(value = "search", required = false) String search, Model model) {
+        if (search != null && !search.isEmpty()) {
+            model.addAttribute("pages", PageListDto.from(pageService.searchPages(search)));
+        } else {
+            model.addAttribute("pages", PageListDto.from(pageService.getPages()));
+        }
         return "list";
     }
 
