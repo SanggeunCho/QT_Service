@@ -123,19 +123,19 @@
                 <img th:src="@{'/image/' + ${page.image}}" style="width: 200px; height: 200px;">
             </div>
             <div class="button-container">
-                <button class="delete_btn" th:onclick="confirmDelete([[${page.id}]])">삭제</button>
+                <button class="delete_btn" th:onclick="location.href='./delete/' + [[${page.id}]]">삭제</button>
                 <button class="edit_btn" th:onclick="location.href='./edit/' + [[${page.id}]]">수정</button>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    function confirmDelete(id){
-        if(confirm('정말 삭제하시겠습니까?')){
-            location.href = './delete/' + id;
-        }
-    }
-</script>
+<!--<script>-->
+<!--    function confirmDelete(id){-->
+<!--        if(confirm('정말 삭제하시겠습니까?')){-->
+<!--            location.href = './delete/' + id;-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 </body>
 </html>
