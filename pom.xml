@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
-  <artifactId>CoupangSpring</artifactId>
+  <artifactId>QTNOTE</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>CoupangSpring Maven Webapp</name>
+  <name>QTNOTE Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
     <maven.compiler.source>8</maven.compiler.source>
@@ -37,18 +37,18 @@
     </dependency>
 
     <!-- MySQL -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.19</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>mysql</groupId>-->
+<!--      <artifactId>mysql-connector-java</artifactId>-->
+<!--      <version>8.0.19</version>-->
+<!--    </dependency>-->
 
     <!-- MariaDB -->
-<!--    <dependency>-->
-<!--      <groupId>org.mariadb.jdbc</groupId>-->
-<!--      <artifactId>mariadb-java-client</artifactId>-->
-<!--      <version>3.1.0</version>-->
-<!--    </dependency>-->
+    <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>3.1.0</version>
+    </dependency>
 
     <!-- Spring JDBC -->
     <dependency>
@@ -118,6 +118,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>CoupangSpring</finalName>
+    <finalName>QTNOTE</finalName>
   </build>
 </project>

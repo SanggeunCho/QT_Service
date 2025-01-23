@@ -3,55 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keys</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Detail Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .topic {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+        }
+
+        .topic h1 {
+            margin: 10px 0;
+            font-size: 36px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin: 20px 0;
+            font-size: 30px;
+        }
+
+        .view_form {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card .script p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .card .script p span {
+            display: block;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .card .script .button-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .card .script button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .delete_btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .delete_btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .edit_btn {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .edit_btn:hover {
+            background-color: #1976D2;
+        }
+
+        .card .script {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" th:href="@{/}">Coupang</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</nav>
-<div class="container mt-5">
-    <h2 class="text-center">상품 상세 정보</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <img th:src="@{'/image/' + ${product.image}}" class="img-fluid" style="max-width: 100%; height: auto;">
-                        </div>
-                        <div class="col-md-8">
-                            <h3 class="card-title">상품명: <span th:text="${product.name}">상품 이름</span></h3>
-                            <p class="card-text">가격: <span th:text="${product.price}">₩ 가격</span></p>
-                            <p class="card-text">재고 수량: <span th:text="${product.stock}">재고 수량</span></p>
-                            <p class="card-text">설명: <span th:text="${product.description}">상품 설명</span></p>
-                            <button class="btn btn-warning" th:onclick="location.href='./edit/' + [[${product.id}]]">수정하기</button>
-                            <button class="btn btn-danger" th:onclick="confirmDelete([[${product.id}]])">삭제하기</button>
-                        </div>
-                    </div>
-                </div>
+<div class="topic">
+    "주의 말씀은 내 발의 등이요 내 길에 빛이니이다" (시 119:105)<br>
+    <h1><a th:href="@{/}" style="text-decoration: none; color: inherit;">Quiet Time with Jesus</a></h1>
+</div>
+<h2>묵상 보기</h2>
+<div class="view_form">
+    <div class="card">
+        <div class="script">
+            <p class="word">말씀: <span th:text="${page.word}">word</span></p>
+            <p class="celebration">찬양: <span th:text="${page.celebration}">celebration</span></p>
+            <p class="summation">말씀 요약: <span th:text="${page.summation}">summation</span></p>
+            <p class="contemplation">묵상 및 적용: <span th:text="${page.contemplation}">contemplation</span></p>
+            <p class="pray">기도제목: <span th:text="${page.pray}">pray</span></p>
+            <div class="image">
+                <img th:src="${page.image != null ? '/image/' + page.image : '/image/default.jpg'}"
+                     class="img-fluid"
+                     style="max-width: 100%; height: auto;">
+            </div>
+            <div class="button-container">
+                <button class="delete_btn">삭제</button>
+                <button class="edit_btn">수정</button>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    function confirmDelete(id) {
-        if (confirm('정말 삭제하시겠습니까?')) {
-            location.href = './delete/' + id;
-        }
-    }
-</script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

@@ -1,56 +1,135 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Form</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Edit Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .topic {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+        }
+
+        .topic h1 {
+            margin: 10px 0;
+            font-size: 36px;
+        }
+
+        .add_form {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 10px 20px 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .add_form h2 {
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group.text-right {
+            text-align: right;
+        }
+
+        .submit_bnt {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit_bnt:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" th:href="@{/}">Coupang</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</nav>
-
-<div class="container mt-5">
-    <h2 class="mb-4">상품 수정하기</h2>
-    <form th:action="@{/products/edit}" th:object="${form}" method="post" enctype="multipart/form-data">
+<div class="topic">
+    "주의 말씀은 내 발의 등이요 내 길에 빛이니이다" (시 119:105)<br>
+    <h1><a th:href="@{/}" style="text-decoration: none; color: inherit;">Quiet Time with Jesus</a></h1>
+</div>
+<div class="add_form">
+    <h2>묵상 수정하기</h2>
+    <form th:action="@{/pages/edit}" th:object="${form}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}">
         <div class="form-group">
-            <label for="name">상품명:</label>
-            <input type="text" id="name" name="name" class="form-control" th:field="*{name}" placeholder="상품명"
-                   maxlength="40">
+            <label for="word">말씀 구절:</label>
+            <input type="text" id="word" name="word" class="form-control" th:field="*{word}" placeholder="말씀 구절" maxlength="40" required>
         </div>
         <div class="form-group">
-            <label for="price">가격(원):</label>
-            <input type="number" id="price" name="price" class="form-control" th:field="*{price}" placeholder="1000"
-                   min="0">
+            <label for="celebration">찬양:</label>
+            <input type="text" id="celebration" name="celebration" class="form-control" th:field="*{celebration}" placeholder="찬양" maxlength="40">
         </div>
         <div class="form-group">
-            <label for="stock">재고 수량:</label>
-            <input type="number" id="stock" name="stock" class="form-control" th:field="*{stock}" placeholder="100"
-                   min="0">
+            <label for="summation">말씀 요약:</label>
+            <textarea id="summation" name="summation" class="form-control" th:field="*{summation}" placeholder="말씀 요약"></textarea>
         </div>
         <div class="form-group">
-            <label for="description">설명:</label>
-            <textarea id="description" name="description" class="form-control" th:field="*{description}"
-                      placeholder="설명" maxlength="200"></textarea>
+            <label for="contemplation">묵상 및 적용:</label>
+            <textarea id="contemplation" name="contemplation" class="form-control" th:field="*{contemplation}" placeholder="묵상 및 적용"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="pray">기도 제목:</label>
+            <textarea id="pray" name="pray" class="form-control" th:field="*{pray}" placeholder="기도 제목"></textarea>
         </div>
         <div class="form-group">
             <label>기존 이미지:</label>
             <img th:src="@{'/image/' + ${image}}" style="width: 200px; height: 200px;">
         </div>
         <div class="form-group">
-            <label for="image">상품 이미지:</label>
+            <label for="image">새 이미지:</label>
             <input type="file" id="image" name="image" class="form-control" accept="image/*">
         </div>
         <div class="form-group text-right">
-            <button type="submit" class="btn btn-primary">수정하기</button>
+            <button type="submit" class="submit_bnt">수정하기</button>
         </div>
     </form>
 </div>
